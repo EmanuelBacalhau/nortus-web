@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useId } from 'react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
+import { useAuth } from '@/hooks/useAuth';
 import { publicServices } from '@/services/public-services';
 
 const formSchema = z.object({
@@ -14,6 +15,8 @@ type FormData = z.infer<typeof formSchema>;
 
 export function useFormSignInController() {
 	const rememberId = useId();
+
+	const { signIn } = useAuth();
 
 	const {
 		register,
@@ -33,7 +36,7 @@ export function useFormSignInController() {
 
 	const onSubmit = async (data: FormData) => {
 		const response = await mutateAsync();
-		console.log(data, response);
+		signIn(response.data.accessToken, response.data.username);
 	};
 
 	return {

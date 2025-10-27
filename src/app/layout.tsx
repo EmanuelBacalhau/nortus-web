@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
+import { AuthProvider } from '@/providers/auth-provider';
 import { TanstacQueryClientProvider } from '@/providers/tanstack-query-client-provider';
 
 const spaceGrotesk = Space_Grotesk({
@@ -22,7 +23,9 @@ export default function RootLayout({
 			<body
 				className={`${spaceGrotesk.variable} antialiased min-h-screen bg-background`}
 			>
-				<TanstacQueryClientProvider>{children}</TanstacQueryClientProvider>
+				<TanstacQueryClientProvider>
+					<AuthProvider>{children}</AuthProvider>
+				</TanstacQueryClientProvider>
 			</body>
 		</html>
 	);
