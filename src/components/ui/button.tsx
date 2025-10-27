@@ -1,3 +1,5 @@
+'use client';
+
 type ButtonProps =
 	| (React.ComponentProps<'button'> & {
 			size: 'icon';
@@ -17,7 +19,7 @@ type Button = ButtonProps & {
 
 export function Button({
 	size = 'default',
-	isActive,
+	isActive = false,
 	icon,
 	className,
 	...props
@@ -26,7 +28,7 @@ export function Button({
 		return (
 			<button
 				{...props}
-				className={`h-14 w-14 rounded-xl flex items-center justify-center ${isActive ? 'bg-primary' : 'bg-gray-600/50'} hover:bg-primary transition-colors ${className ?? ''}`}
+				className={`cursor-pointer h-14 w-14 rounded-xl flex items-center justify-center ${isActive ? 'bg-primary' : 'bg-gray-600/50'} hover:bg-primary transition-colors ${className ?? ''}`}
 			>
 				{icon}
 			</button>
@@ -36,7 +38,7 @@ export function Button({
 	return (
 		<button
 			{...props}
-			className={`px-5 py-2 rounded-lg bg-primary hover:bg-primary/80 transition-colors w-full ${className ?? ''}`}
+			className={`cursor-pointer px-5 py-2 rounded-lg bg-primary hover:bg-primary/80 transition-colors w-full ${className ?? ''}`}
 		/>
 	);
 }
